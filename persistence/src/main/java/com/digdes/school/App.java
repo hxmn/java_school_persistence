@@ -1,7 +1,7 @@
 package com.digdes.school;
 
 /**
- * Hello world!
+ * Main class for our application.
  */
 public class App {
     public static void main(String[] args) {
