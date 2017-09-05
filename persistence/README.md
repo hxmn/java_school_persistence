@@ -14,4 +14,8 @@ mvn archetype:generate
 
 After answering on some question you'll get a proper project structure for maven.
 
-### 
+### Testing project
+```shell
+mvn test
+```
+
