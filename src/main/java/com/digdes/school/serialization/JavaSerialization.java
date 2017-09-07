@@ -6,6 +6,8 @@ import java.io.*;
  * Simple use of standard serialization
  * <p>
  * Usage examples you can find in {@link com.digdes.school.serialization.JavaSerializationTest}
+ *
+ * @author Ilya Ashikhmin (ashikhmin.i@digdes.com)
  */
 @SuppressWarnings("JavadocReference")
 public class JavaSerialization {
