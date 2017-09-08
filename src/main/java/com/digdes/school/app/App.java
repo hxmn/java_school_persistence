@@ -1,4 +1,4 @@
-package com.digdes.school;
+package com.digdes.school.app;
 
 /**
  * Main class for our application.
