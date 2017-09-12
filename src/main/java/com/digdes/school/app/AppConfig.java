@@ -51,5 +51,37 @@ public class AppConfig {
         return dataSource;
     }
 
+    @Bean
+    public LocalSessionFactoryBean sessionFactory() {
+        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        sessionFactory.setDataSource(restDataSource());
+        sessionFactory.setPackagesToScan("com.digdes.weather.model");
+        sessionFactory.setHibernateProperties(hibernateProperties());
+        return sessionFactory;
+    }
 
+    @Bean
+    @Autowired
+    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
+        HibernateTransactionManager txManager = new HibernateTransactionManager();
+        txManager.setSessionFactory(sessionFactory);
+        return txManager;
+    }
+
+    /**
+     * creating map of hibernate properties only
+     *
+     * @return Hibernate properties
+     */
+    private Properties hibernateProperties() {
+        Properties props = new Properties();
+        MutablePropertySources propSources = ((AbstractEnvironment) env).getPropertySources();
+        Map<String, String> hibernateMap = stream(spliteratorUnknownSize(propSources.iterator(), ORDERED), false)
+                .filter(ps -> ps instanceof MapPropertySource)
+                .flatMap(ps -> ((MapPropertySource) ps).getSource().entrySet().stream())
+                .filter(entry -> entry.getKey().contains("hibernate"))
+                .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().toString()));
+        props.putAll(hibernateMap);
+        return props;
+    }
 }
