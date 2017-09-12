@@ -27,7 +27,7 @@ import static java.util.stream.StreamSupport.stream;
 /**
  * Annotation configuration of app.
  *
- * @author Ilya Ashikhmin (ashikhmin.i@digdes.com)
+ * @author Ilya Ashikhmin (ashikhmin.ilya@gmail.com)
  */
 @Configuration
 @EnableTransactionManagement

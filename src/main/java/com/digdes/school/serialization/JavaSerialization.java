@@ -7,7 +7,7 @@ import java.io.*;
  * <p>
  * Usage examples you can find in {@link com.digdes.school.serialization.JavaSerializationTest}
  *
- * @author Ilya Ashikhmin (ashikhmin.i@digdes.com)
+ * @author Ilya Ashikhmin (ashikhmin.ilya@gmail.com)
  */
 @SuppressWarnings("JavadocReference")
 public class JavaSerialization {

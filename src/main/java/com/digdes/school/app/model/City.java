@@ -11,7 +11,7 @@ import javax.persistence.Id;
 /**
  * ...
  *
- * @author Ilya Ashikhmin (ashikhmin.i@digdes.com)
+ * @author Ilya Ashikhmin (ashikhmin.ilya@gmail.com)
  */
 @SuppressWarnings("UnusedDeclaration")
 @Entity

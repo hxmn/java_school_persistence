@@ -11,6 +11,13 @@
     <name>Project for teaching persistence in Java School</name>
     <url>http://www.digdes.com</url>
 
+    <developers>
+        <developer>
+            <name>Ilya Ashikhmin</name>
+            <email>ashikhmin.ilya@gmail.com</email>
+        </developer>
+    </developers>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -74,5 +81,13 @@
             <artifactId>lombok</artifactId>
             <version>1.14.8</version>
         </dependency>
+
+        <!-- JSON libs -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20131018</version>
+        </dependency>
+
     </dependencies>
 </project>

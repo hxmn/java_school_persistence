@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Interface for Forecast Service
  *
- * @author Ilya Ashikhmin (ashikhmin.i@digdes.com)
+ * @author Ilya Ashikhmin (ashikhmin.ilya@gmail.com)
  */
 public interface ForecastService {
     List<Forecast> receiveForecasts(Long cityId);
