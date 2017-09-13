@@ -14,7 +14,7 @@ import java.util.List;
 import static org.json.XML.toJSONObject;
 
 /**
- * ...
+ * Parse XML from  http://informer.gismeteo.ru/xml/...
  *
  * @author Ilya Ashikhmin (ashikhmin.ilya@gmail.com)
  */
