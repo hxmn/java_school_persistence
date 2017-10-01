@@ -15,7 +15,7 @@ import java.net.URL;
  * @author Ilya Ashikhmin (ashikhmin.ilya@gmail.com)
  */
 @Service
-public class HttpSerivceImpl implements HttpService {
+public class HttpServiceImpl implements HttpService {
     @Override
     public String getUrl(String link) {
         try {
