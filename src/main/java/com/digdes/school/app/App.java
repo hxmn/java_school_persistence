@@ -21,7 +21,7 @@ public class App {
                 new AnnotationConfigApplicationContext(AppConfig.class);
 
         ForecastService fs = ctx.getBean(ForecastService.class);
-        List<Forecast> forecasts = fs.receiveForecasts(SPB);
+        List<Forecast> forecasts = fs.getForecastsFromWebService(SPB);
     }
 
     public static void startWithXmlConfig() {

@@ -10,9 +10,9 @@ import java.util.List;
  * @author Ilya Ashikhmin (ashikhmin.ilya@gmail.com)
  */
 public interface ForecastService {
-    List<Forecast> receiveForecasts(Long cityId);
+    List<Forecast> getForecastsFromWebService(Long cityId);
 
-    List<Forecast> savedForecasts(Long cityId);
+    List<Forecast> getForecastsFromDb(Long cityId);
 
-    void updateForecast(Long cityId);
+    void loadForecastsToDb(Long cityId);
 }
