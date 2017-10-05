@@ -20,6 +20,7 @@ public class ForecastParserImplTest {
         assertNotNull(forecasts);
         assertEquals(forecasts.size(), 4);
         for (Forecast forecast : forecasts) {
+            assertNotNull(forecast.getDate());
             assertTrue(forecast.getTemperatureMax() > forecast.getTemperatureMin());
         }
     }

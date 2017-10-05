@@ -55,7 +55,7 @@ public class AppConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(restDataSource());
-        sessionFactory.setPackagesToScan("com.digdes.weather.model");
+        sessionFactory.setPackagesToScan("com.digdes.school.app.model");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }

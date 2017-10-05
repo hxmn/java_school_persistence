@@ -15,4 +15,6 @@ public interface ForecastService {
     List<Forecast> getForecastsFromDb(Long cityId);
 
     void loadForecastsToDb(Long cityId);
+
+    void saveAll(List<Forecast> forecasts);
 }

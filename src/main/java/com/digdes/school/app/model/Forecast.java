@@ -62,4 +62,14 @@ public class Forecast {
     private Integer heatMin;
 
     private Integer heatMax;
+
+    @Override
+    public String toString() {
+        return "Forecast{" +
+                "cityId=" + cityId +
+                ", date=" + date +
+                ", temperatureMin=" + temperatureMin +
+                ", temperatureMax=" + temperatureMax +
+                '}';
+    }
 }

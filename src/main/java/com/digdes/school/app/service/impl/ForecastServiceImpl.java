@@ -17,9 +17,7 @@ import static org.hibernate.criterion.Restrictions.eq;
 /**
  * ...
  *
- * @author Ilya Ashikhmin (ashikhmin.i@digdes.com)
- * Date: 12.04.17 17:08
- * Copyright Digital Design (http://digdes.com)
+ * @author Ilya Ashikhmin (ashikhmin.ilya@gmail.com)
  */
 @SuppressWarnings("WeakerAccess")
 @Service
@@ -27,19 +25,23 @@ public class ForecastServiceImpl implements ForecastService {
     private static final String WEATHER_URL_FORMAT = "http://informer.gismeteo.ru/xml/%d_1.xml";
 
     @Autowired
-    HttpService httpService;
+    private HttpService httpService;
 
     @Autowired
-    ForecastParser forecastParser;
+    private ForecastParser forecastParser;
 
     @Autowired
-    SessionFactory session;
+    private SessionFactory session;
 
     @Override
     public List<Forecast> getForecastsFromWebService(Long cityId) {
         String url = format(WEATHER_URL_FORMAT, cityId);
         String xml = httpService.getUrl(url);
-        return forecastParser.parse(xml);
+        List<Forecast> forecasts = forecastParser.parse(xml);
+        if (forecasts != null)
+            for (Forecast forecast : forecasts)
+                forecast.setCityId(cityId);
+        return forecasts;
     }
 
     @SuppressWarnings("unchecked")
@@ -55,9 +57,24 @@ public class ForecastServiceImpl implements ForecastService {
     @Transactional
     public void loadForecastsToDb(Long cityId) {
         List<Forecast> forecasts = getForecastsFromWebService(cityId);
-        forecasts.forEach(forecast -> {
-            forecast.setCityId(cityId);
-            session.getCurrentSession().save(forecast);
-        });
+        saveAll(forecasts);
+    }
+
+    @Override
+    @Transactional
+    public void saveAll(List<Forecast> forecasts) {
+        forecasts.forEach(forecast -> session.getCurrentSession().save(forecast));
+    }
+
+    public void setHttpService(HttpService httpService) {
+        this.httpService = httpService;
+    }
+
+    public void setForecastParser(ForecastParser forecastParser) {
+        this.forecastParser = forecastParser;
+    }
+
+    public void setSession(SessionFactory session) {
+        this.session = session;
     }
 }

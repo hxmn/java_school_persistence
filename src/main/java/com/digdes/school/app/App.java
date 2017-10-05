@@ -21,7 +21,21 @@ public class App {
                 new AnnotationConfigApplicationContext(AppConfig.class);
 
         ForecastService fs = ctx.getBean(ForecastService.class);
+
+        System.out.println("Getting forecasts from Web Service.");
         List<Forecast> forecasts = fs.getForecastsFromWebService(SPB);
+        for (Forecast forecast : forecasts) {
+            System.out.println(forecast);
+        }
+
+        System.out.println("Saving it to database.");
+        fs.saveAll(forecasts);
+
+        System.out.println("Load all forecasts from DataBase.");
+        forecasts = fs.getForecastsFromDb(SPB);
+        for (Forecast forecast : forecasts) {
+            System.out.println(forecast);
+        }
     }
 
     public static void startWithXmlConfig() {
