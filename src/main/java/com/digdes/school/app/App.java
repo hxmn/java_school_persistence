@@ -3,6 +3,8 @@ package com.digdes.school.app;
 import com.digdes.school.app.model.Forecast;
 import com.digdes.school.app.service.ForecastService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 
@@ -11,15 +13,10 @@ import java.util.List;
  */
 public class App {
     public static final long SPB = 26063L;
+
     public static void main(String[] args) {
-//        startWithXmlConfig();
-        startWithAnnotationConfig();
-    }
-
-    public static void startWithAnnotationConfig() {
-        AnnotationConfigApplicationContext ctx =
-                new AnnotationConfigApplicationContext(AppConfig.class);
-
+//        AbstractApplicationContext ctx = getAnnotationContext();
+        AbstractApplicationContext ctx = getXmlContext();
         ForecastService fs = ctx.getBean(ForecastService.class);
 
         System.out.println("Getting forecasts from Web Service.");
@@ -38,7 +35,12 @@ public class App {
         }
     }
 
-    public static void startWithXmlConfig() {
+    private static AbstractApplicationContext getXmlContext() {
+        return new ClassPathXmlApplicationContext("sprint-ctx.xml");
 
+    }
+
+    private static AbstractApplicationContext getAnnotationContext() {
+        return new AnnotationConfigApplicationContext(AppConfig.class);
     }
 }
