@@ -10,9 +10,9 @@ import java.io.*;
  * @author Ilya Ashikhmin (ashikhmin.ilya@gmail.com)
  */
 @SuppressWarnings("JavadocReference")
-public class JavaSerialization {
+public class JavaSerialization implements Marshaller {
 
-    public static void saveObject(Object obj, String fileName) throws IOException {
+    public void saveObject(Object obj, String fileName) throws IOException {
         File file = new File(fileName);
         if (file.exists())
             System.out.println(String.format("WARN: File [%s] exists. Overwriting it.", fileName));
@@ -26,7 +26,7 @@ public class JavaSerialization {
         }
     }
 
-    public static Object loadObject(String fileName) throws IOException, ClassNotFoundException {
+    public Object loadObject(String fileName) throws IOException, ClassNotFoundException {
         File file = new File(fileName);
         if (!file.exists()) {
             System.out.println(String.format("WARN: File [%s] not exists. Returning null.", fileName));

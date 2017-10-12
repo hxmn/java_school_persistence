@@ -2,6 +2,7 @@ package com.digdes.school.serialization;
 
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
@@ -11,11 +12,23 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * Test for java serialization
+ *
+ * @author Ilya Ashikhmin (ashikhmin.ilya@gmail.com)
+ */
 public class JavaSerializationTest {
     private static final String FILE_NAME = "pojo.bin";
 
+    Marshaller marshaller;
+
+    @Before
+    public void setUp() {
+        marshaller = new JavaSerialization();
+    }
+
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         File file = new File(FILE_NAME);
         if (file.exists())
             //noinspection ResultOfMethodCallIgnored
@@ -30,14 +43,14 @@ public class JavaSerializationTest {
         NoSerializable ns = new NoSerializable();
         ns.someStr = "test";
 
-        JavaSerialization.saveObject(ns, FILE_NAME);
+        marshaller.saveObject(ns, FILE_NAME);
     }
 
     @Test
     public void testSavingAndLoading() throws IOException, ClassNotFoundException {
         SimplePojo pojo = buildPojo();
-        JavaSerialization.saveObject(pojo, FILE_NAME);
-        SimplePojo loaded = (SimplePojo) JavaSerialization.loadObject(FILE_NAME);
+        marshaller.saveObject(pojo, FILE_NAME);
+        SimplePojo loaded = (SimplePojo) marshaller.loadObject(FILE_NAME);
         Assert.assertNotNull(loaded);
         Assert.assertNull(loaded.getSkipSaving());
         Assert.assertEquals(pojo, loaded);
@@ -107,6 +120,6 @@ class SimplePojo implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, val, date);
+        return Objects.hash(getName(), getVal(), getDate());
     }
 }

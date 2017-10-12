@@ -9,6 +9,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ *  Testing parser.
+ *
+ *  @author Ilya Ashikhmin (ashikhmin.ilya@gmail.com)
+ */
 public class ForecastParserImplTest {
     @Test
     public void testParser() throws IOException {
