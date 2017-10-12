@@ -7,5 +7,6 @@ import java.io.IOException;
  */
 public interface Marshaller {
     void saveObject(Object obj, String fileName) throws IOException;
-    Object loadObject(String fileName) throws IOException, ClassNotFoundException;
+
+    <T> T loadObject(String fileName, Class<T> klass) throws IOException, ClassNotFoundException;
 }

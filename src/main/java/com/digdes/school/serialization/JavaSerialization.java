@@ -26,7 +26,7 @@ public class JavaSerialization implements Marshaller {
         }
     }
 
-    public Object loadObject(String fileName) throws IOException, ClassNotFoundException {
+    public <T> T loadObject(String fileName, Class<T> klass) throws IOException, ClassNotFoundException {
         File file = new File(fileName);
         if (!file.exists()) {
             System.out.println(String.format("WARN: File [%s] not exists. Returning null.", fileName));
@@ -38,6 +38,6 @@ public class JavaSerialization implements Marshaller {
             obj = ois.readObject();
         }
 
-        return obj;
+        return (T) obj;
     }
 }

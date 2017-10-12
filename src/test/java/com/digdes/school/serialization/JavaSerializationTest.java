@@ -50,7 +50,7 @@ public class JavaSerializationTest {
     public void testSavingAndLoading() throws IOException, ClassNotFoundException {
         SimplePojo pojo = buildPojo();
         marshaller.saveObject(pojo, FILE_NAME);
-        SimplePojo loaded = (SimplePojo) marshaller.loadObject(FILE_NAME);
+        SimplePojo loaded =  marshaller.loadObject(FILE_NAME, SimplePojo.class);
         Assert.assertNotNull(loaded);
         Assert.assertNull(loaded.getSkipSaving());
         Assert.assertEquals(pojo, loaded);
