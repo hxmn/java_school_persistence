@@ -1,37 +1,24 @@
 package com.digdes.school.serialization;
 
-import org.junit.After;
+import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.NotSerializableException;
-import java.util.Date;
 
 /**
- * Test for java serialization
+ * Test for jackson serialization
  *
  * @author Ilya Ashikhmin (ashikhmin.ilya@gmail.com)
  */
-public class JavaSerializationTest extends AbstractSerializationTest {
-
+public class JacksonSerializationTest extends AbstractSerializationTest {
     @Before
     public void setUp() {
-        fileName = "pojo.bin";
-        marshaller = new JavaSerialization();
-    }
-
-    @Test(expected = NotSerializableException.class)
-    public void testForgotInterfaceDeclaration() throws IOException {
-        class NoSerializable {
-            String someStr;
-        }
-        NoSerializable ns = new NoSerializable();
-        ns.someStr = "test";
-
-        marshaller.saveObject(ns, fileName);
+        fileName = "pojo.json";
+        marshaller = new JacksonSerialization();
     }
 
     @Test
@@ -39,10 +26,12 @@ public class JavaSerializationTest extends AbstractSerializationTest {
         SimplePojo pojo = buildPojo();
         marshaller.saveObject(pojo, fileName);
         SimplePojo loaded = marshaller.loadObject(fileName, SimplePojo.class);
+
+        System.out.println("Resulted json:");
+        System.out.println(IOUtils.toString(new FileInputStream(new File(fileName))));
+
         Assert.assertNotNull(loaded);
         Assert.assertNull(loaded.getSkipSaving());
         Assert.assertEquals(pojo, loaded);
     }
 }
-
-
