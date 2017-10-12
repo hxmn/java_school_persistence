@@ -9,33 +9,21 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.NotSerializableException;
 
 /**
  * Test for java serialization
  *
  * @author Ilya Ashikhmin (ashikhmin.ilya@gmail.com)
  */
-public class JavaSerializationTest extends AbstractSerializationTest {
-
+public class JaxbSerializationTest extends AbstractSerializationTest {
     @Before
     public void setUp() {
-        fileName = "pojo.bin";
-        marshaller = new JavaSerialization();
-    }
-
-    @Test(expected = NotSerializableException.class)
-    public void testForgotInterfaceDeclaration() throws IOException {
-        class NoSerializable {
-            String someStr;
-        }
-        NoSerializable ns = new NoSerializable();
-        ns.someStr = "test";
-
-        marshaller.saveObject(ns, fileName);
+        fileName = "pojo.xml";
+        marshaller = new JaxbSerialization();
     }
 
     @Test
@@ -44,10 +32,23 @@ public class JavaSerializationTest extends AbstractSerializationTest {
         marshaller.saveObject(pojo, fileName);
         SimplePojo loaded = marshaller.loadObject(fileName, SimplePojo.class);
 
+        String xml = IOUtils.toString(new FileInputStream(new File(fileName)));
+        Assert.assertTrue(isXMLValid(xml));
+        System.out.println(xml);
         Assert.assertNotNull(loaded);
         Assert.assertNull(loaded.getSkipSaving());
         Assert.assertEquals(pojo, loaded);
     }
+
+    private boolean isXMLValid(String xml) {
+        try {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            dBuilder.parse(new ByteArrayInputStream(xml.getBytes("utf8")));
+            return true;
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
-
-

@@ -2,10 +2,14 @@ package com.digdes.school.serialization;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+@XmlRootElement
 class SimplePojo implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -40,6 +44,7 @@ class SimplePojo implements Serializable {
         this.date = date;
     }
 
+    @XmlTransient
     public String getSkipSaving() {
         return skipSaving;
     }

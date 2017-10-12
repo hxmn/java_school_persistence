@@ -1,5 +1,6 @@
 package com.digdes.school.serialization;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Before;
@@ -27,11 +28,21 @@ public class JacksonSerializationTest extends AbstractSerializationTest {
         marshaller.saveObject(pojo, fileName);
         SimplePojo loaded = marshaller.loadObject(fileName, SimplePojo.class);
 
-        System.out.println("Resulted json:");
-        System.out.println(IOUtils.toString(new FileInputStream(new File(fileName))));
+        String json = IOUtils.toString(new FileInputStream(new File(fileName)));
+        Assert.assertTrue(isJSONValid(json));
 
         Assert.assertNotNull(loaded);
         Assert.assertNull(loaded.getSkipSaving());
         Assert.assertEquals(pojo, loaded);
+    }
+
+    public static boolean isJSONValid(String jsonInString ) {
+        try {
+            final ObjectMapper mapper = new ObjectMapper();
+            mapper.readTree(jsonInString);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
     }
 }
