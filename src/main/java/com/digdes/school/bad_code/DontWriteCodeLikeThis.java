@@ -1,4 +1,4 @@
-package com.digdes.school.bad;
+package com.digdes.school.bad_code;
 
 import java.io.BufferedReader;
 import java.io.IOException;
