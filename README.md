@@ -1,8 +1,9 @@
 ## Java Persistence Lecture
 
 Packages here:
-* `com.digdes.persist`. Common serialization techniques in Java.
-* `com.digdes.weather`. An app that showcases Spring Framework and Hibernate interaction.
+* `com.digdes.school.serialization`. Common serialization techniques in Java.
+* `com.digdes.school.jdbc`. JDBC example
+* `com.digdes.school.app`. An app that showcases Spring Framework and Hibernate interaction.
 
 ### Creating project
 This project is created by maven archetype templating mechanism. 
