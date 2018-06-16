@@ -1,4 +1,4 @@
-## Teaching material for Java School at [Digitial Design](http://digdes.com) company
+## Java Persistence Lecture
 
 Packages here:
 * `com.digdes.persist`. Common serialization techniques in Java.
